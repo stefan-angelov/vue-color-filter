@@ -8,8 +8,13 @@
       </color-type-selector>
     </div>
     <div>
-      <hex-color-input v-if="type === namespaces.HEX"></hex-color-input>
-      <r-g-b-color-input v-else></r-g-b-color-input>
+      <hex-color-input v-if="type === namespaces.HEX"
+        @hexInput="onHexInput">
+      </hex-color-input>
+      <r-g-b-color-input v-else>
+      </r-g-b-color-input>
+
+      <button>GENERATE FILTER</button>
     </div>
     
   </div>
@@ -38,6 +43,10 @@ export default {
   methods: {
     onTypeSelected(type) {
       this.type = type;
+    },
+    onHexInput(hexColor) {
+      // eslint-disable-next-line
+      console.log(hexColor);
     }
   }
 }
