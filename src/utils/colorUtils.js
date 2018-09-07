@@ -2,6 +2,17 @@ export function isValidHexColor(color) {
     return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);
 }
 
+export function isValidRgbValue(value) {
+    const colorNum = +value;
+    if(!isNaN(colorNum)) {
+        if(colorNum >= 0 && colorNum <= 255) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 export function hexToRgb(hexColor) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
     const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;

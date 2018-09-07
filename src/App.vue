@@ -11,10 +11,11 @@
       <hex-color-input v-if="type === namespaces.HEX"
         @hexInput="onHexInput">
       </hex-color-input>
-      <r-g-b-color-input v-else>
+      <r-g-b-color-input v-else
+        @rgbInput="onRgbInput">
       </r-g-b-color-input>
 
-      <button>GENERATE FILTER</button>
+      <button :disabled="!rgbColorTarget">GENERATE FILTER</button>
     </div>
     
   </div>
@@ -22,6 +23,7 @@
 
 <script>
 import * as namespaces from './namespaces/colorsType';
+import { hexToRgb } from './utils/colorUtils.js';
 
 import ColorTypeSelector from './components/ColorTypeSelector';
 import HexColorInput from './components/HexColorInput';
@@ -37,7 +39,8 @@ export default {
   data: function() {
     return {
       type: namespaces.HEX,
-      namespaces: namespaces
+      namespaces: namespaces,
+      rgbColorTarget: null
     } 
   },
   methods: {
@@ -45,8 +48,10 @@ export default {
       this.type = type;
     },
     onHexInput(hexColor) {
-      // eslint-disable-next-line
-      console.log(hexColor);
+      this.rgbColorTarget = hexToRgb(hexColor);
+    },
+    onRgbInput(rgb) {
+      this.rgbColorTarget = rgb;
     }
   }
 }
@@ -61,5 +66,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+input, button {
+   font-family: 'Lato', Helvetica, Arial, sans-serif;
 }
 </style>
